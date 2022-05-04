@@ -1,1 +1,1 @@
-# TwitterJournal-Frontend
+# twitter-journal-frontend
