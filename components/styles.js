@@ -21,4 +21,9 @@ export default makeStyles((theme) => ({
     marginTop: 10,
     color: 'white',
   },
+  item: {
+    backgroundColor: 'aliceblue',
+    padding: 10,
+    margin: 30,
+  }
 }));
