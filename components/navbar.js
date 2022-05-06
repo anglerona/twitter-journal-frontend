@@ -13,7 +13,7 @@ export default function Navbar() {
       <Link href="/history">
         <a>History</a>
       </Link>
-     
+      <br></br>
     </nav>
   )
 }
