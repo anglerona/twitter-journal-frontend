@@ -4,9 +4,11 @@ import Styles from './navbar.module.css'
 export default function Navbar() {
   return (
     <nav className={Styles.nav}>
-        <div> Twitter Journal </div>
+      <div>
+        <Link href="/">Twitter Journal</Link> 
+      </div>
       <Link href="/entry">
-        <a>Home </a>
+        <a>Journal Entry</a>
       </Link>
       <Link href="/history">
         <a>History</a>
