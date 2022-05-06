@@ -22,7 +22,7 @@ const Form = () =>{
                 <Typography variant="h6" text-align="center">Leave Your Comments</Typography>
                 <TextField name="comment" variant="outlined" label = "Write your thoughts" fullWidth value={postData.comment} onChange={(e)=>setPostData({ ...postData, comment: e.target.value})}/>
                 <Button className={classes.buttonSubmit} color="primary" variant="contained" size="large" type="submit" fullWidth>{currentId ? 'Editing':'Submit'} </Button>
-                <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+                <Button className={classes.buttonClear}  color="secondary" variant="contained" size="small" onClick={clear} fullWidth>Clear</Button>
              </form>
 
         </Paper>
