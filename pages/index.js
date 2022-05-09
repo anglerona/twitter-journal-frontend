@@ -4,6 +4,7 @@ import Form from '../components/Form';
 import Content from '../components/content'
 import Tweets from '../components/tweets'
 import LandingPage from '../components/LandingPage'
+import PastInfo from '../components/PastInfo'
 
 
 export default function Index() {
@@ -14,6 +15,7 @@ export default function Index() {
     <Content />
     <Tweets /> */}
     <LandingPage />
+    <PastInfo />
     </Layout>
     )
   }

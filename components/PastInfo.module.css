@@ -1,0 +1,65 @@
+.container {
+    height: "100vh";
+    border-radius: 20px;
+    width: 90%;
+    height: 240px;
+    padding: 10px;
+    font-size: sans-serif;
+    font-Weight: bold;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "topic hoverButton"
+      "comment ."
+      ". .";  
+}
+
+.container:hover {
+    border: 1px solid #048686;
+    
+}
+
+.hoverButton {
+    padding:10px;
+    margin:10px;
+    border-radius: 10px;
+    background-color: #048686;
+    width: 100px;
+    height: 40px;
+    color: #FFFFFF;
+    font-family: 'sans-serif';
+    font-weight: 'bold';
+    letter-spacing: 0.25px;
+    text-align: center;
+    grid-area: hoverButton;
+}
+
+.topic {
+    background-color: #96A6AD;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    margin:10px;
+    grid-area: topic;
+}
+
+.comment {
+    background-color: #C7D6DD;
+    height: 100px;
+    padding: 10px;
+    margin:10px;
+    border-radius: 10px;
+    font-size: 16px;
+    grid-area: comment;
+}
+
+.comment > a {
+    font-weight: lighter;
+    font-family: sans-serif;
+    text-align: right;
+    font-size: 12px;
+    padding: 10px;
+}
