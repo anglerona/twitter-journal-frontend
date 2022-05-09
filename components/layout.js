@@ -5,8 +5,11 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
+        <title> Twitter Journal</title>
+        <meta name="keywords" content="twitter"/>
       </Head>
       <main className={styles.main}>{children}</main>
+      
     </>
   )
 }

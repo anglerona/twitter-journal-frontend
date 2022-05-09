@@ -5,7 +5,7 @@ import Styles from './content.module.css'
 export default function Index() {
     return (
         <content className={Styles.content}>
-            <h2>Home Page (Index)</h2>
+            <h2>Landing Page (Index)</h2>
             <a>
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dolore magna

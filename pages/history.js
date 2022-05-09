@@ -4,6 +4,7 @@ import Styles from '../components/content.module.css'
 import { EditButton } from '../components/EditButton'
 import { DeleteButton } from '../components/DeleteButton'
 
+
 export default function Index() {
     return (
       <Layout>

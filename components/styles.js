@@ -17,7 +17,6 @@ export default makeStyles((theme) => ({
     justifyContent: 'center',
   },
   buttonSubmit: {
-   width: '50%',
     marginBottom: 10,
     marginTop: 10,
     marginRight: 10,
@@ -25,11 +24,15 @@ export default makeStyles((theme) => ({
     float: 'right'
   },
   buttonClean: {
-    width: '50%',
     height: '20px',
     marginBottom: 10,
     marginTop: 10,
     color: '#048686',
     float: 'right',
+  },
+  item: {
+    backgroundColor: 'aliceblue',
+    padding: 10,
+    margin: 30,
   }
 }));
