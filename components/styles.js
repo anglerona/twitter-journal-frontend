@@ -34,5 +34,6 @@ export default makeStyles((theme) => ({
     backgroundColor: 'aliceblue',
     padding: 10,
     margin: 30,
-  }
+  },
+
 }));
