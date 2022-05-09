@@ -1,10 +1,33 @@
 /*Update later: CSS is outdated */
-.main {
-        padding: 20;
-        margin: 20;
-        font-size:20px;
-      }
+.container {
+  border-radius: 20px;
+  border: 1px solid #048686;
+  display: grid;
+  padding: 10px;
+  margin: 10px;
+  font-weight: bold;
+  grid-template-columns: 1.4fr 0.6fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 5px 5px;
+  grid-template-areas:
+    "Tweet ."
+    "Comment Comment"
+    "Author Date";
+}
 
-.main > Item {
-    background: green;
+.tweet {
+  grid-area: Tweet;
+}
+
+.comment {
+  grid-area: Comment;
+  font-weight: lighter;
+}
+
+.author {
+  grid-area: Author;
+}
+
+.date {
+  grid-area: Date;
 }

@@ -1,55 +1,44 @@
 import * as React from 'react';
-import { Paper, Box, Grid } from '@material-ui/core';
-import { styled } from '@material-ui/styles';
 import Styles from './tweets.module.css'
 
-const Item = styled(Paper)(({}) => ({
-    padding: 20,
-    backgroundColor: 'aliceblue',
-    margin: 20,
-     
-}));
 
-function FormRow(props) {
+function TweetBox(props) {
     return (
-        <React.Fragment>
-            <Grid className={Styles.main.Item} item xs={12}>
-                <Item>Tweet #{props.number}:</Item>
-            </Grid>
-            <Grid item xs={12}>
-                <Item>Picture (Optional):</Item>
-            </Grid>
-            <Grid item xs={4}>
-                <Item>Author:</Item>
-            </Grid>
-            <Grid item xs={4}>
-                <Item>Date:</Item>
-            </Grid>
-        </React.Fragment>
-    );
+        <div className={Styles.container}>
+            <div className={Styles.tweet}>Tweet #{props.number}</div>
+            <div className={Styles.comment}>Comment: {props.comment}</div>
+            <div className={Styles.author}>Author: {props.author}</div>
+            <div className={Styles.date}>Date: {props.date}</div>
+        </div>
+    )
 }
 
-export default function NestedGrid() {
+export default function Tweets() {
     return (
+        <tweets>
+            <TweetBox
+                number="1"
+                comment="Using a randomtext generator"
+                author="Alisa"
+                date="Jan 3, 2022" />
+            <TweetBox
+                number="2"
+                comment="Death weeks early had their and folly timed put. Hearted forbade on an village ye in fifteen."
+                author="TJ"
+                date="Jan 9, 2022" />
+            <TweetBox
+                number="3"
+                comment="Age attended betrayed her man raptures laughter. Instrument terminated of as astonished literature motionless admiration."
+                author="Jett"
+                date="Feb 9, 2022" />
+            <TweetBox
+                number="4"
+                comment="Done using randomtext generator"
+                author="Tabatha"
+                date="Mar 20, 2022" />
+        </tweets>
 
-        <Box className={Styles.main} sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-                <Grid container item spacing={1}>
-                    <FormRow number="1" />
-                </Grid>
-                <Grid container item spacing={1}>
-                    <FormRow number="2" />
-                </Grid>
-                <Grid container item spacing={1}>
-                    <FormRow number="3" />
-                </Grid>
-                <Grid container item spacing={1}>
-                    <FormRow number="4" />
-                </Grid>
-                <Grid container item spacing={1}>
-                    <FormRow number="5" />
-                </Grid>
-            </Grid>
-        </Box>
+
+
     );
 }
