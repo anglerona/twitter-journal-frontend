@@ -7,6 +7,7 @@ const Item = styled(Paper)(({}) => ({
     padding: 20,
     backgroundColor: 'aliceblue',
     margin: 20,
+     
 }));
 
 function FormRow(props) {
@@ -52,6 +53,3 @@ export default function NestedGrid() {
         </Box>
     );
 }
-
-
-
