@@ -1,4 +1,3 @@
-/*Update later: CSS is outdated */
 .container {
   border-radius: 20px;
   border: 1px solid #048686;
@@ -31,3 +30,6 @@
 .date {
   grid-area: Date;
 }
+
+
+
