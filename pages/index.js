@@ -9,10 +9,10 @@ import LandingPage from '../components/LandingPage'
 export default function Index() {
     return (
     <Layout>
-    <Navbar />
+    {/* <Navbar />
     <Form />
     <Content />
-    <Tweets />
+    <Tweets /> */}
     <LandingPage />
     </Layout>
     )

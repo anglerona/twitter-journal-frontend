@@ -1,12 +1,16 @@
 .container {
     display: grid;
-    grid-template-columns: 0.5fr 1fr;
+    grid-template-columns: 0.6fr 0.4fr;
     height: 100%;
     
 }
 
 .block {
     background-color: #8AC3C3;
+    color: #005757;
+    font-family: sans-serif;
+    padding: 100px 0 0 35px;
+    font-size: 25px;
 }
 
 .landpage {

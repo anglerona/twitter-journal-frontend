@@ -1,10 +1,17 @@
 /*Update later: CSS is outdated */
 .main {
-        padding: 20;
+        padding: 0 70px;
         margin: 20;
         font-size:20px;
-      }
+        
+}
 
 .main > Item {
     background: green;
+    
 }
+
+.main > FormRow {
+  border: 1px solid #048686;
+}
+
