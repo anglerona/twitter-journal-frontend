@@ -13,13 +13,16 @@
       float: left;
       width: 70%;
       height: 20%;
-      font-size: 34px;
-      text-transform: uppercase;
+      font-size: 40px;
       letter-spacing: 0.025em;
       color: #048686;
       text-align: left;
       font-weight: bold;
       transition: all 0.125s ease;
+  }
+
+  .nav > div:hover {
+    font-size: 42px;
   }
   
   .nav > a {
@@ -29,9 +32,8 @@
     text-decoration: none;
     background: white;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 18px;
     padding: 12px 16px;
-    text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.025em;
     color: #048686;
@@ -44,4 +46,5 @@
   
   .nav > a:hover {
     background-color: #eaeaea;
+    font-size: 20px;
   }

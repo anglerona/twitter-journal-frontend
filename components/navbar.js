@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <nav className={Styles.nav}>
       <div>
-        <Link href="/">Twitter Journal</Link> 
+        <Link href="/">TwitterJournal</Link> 
       </div>
       <Link href="/entry">
         <a>Journal Entry</a>

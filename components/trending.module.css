@@ -1,15 +1,16 @@
 .main {
     display: block;
-    color:black;
+    color:#048686;
     text-align: center;
     font-size: 30px;
     font-family: sans-serif;
     font-weight: bold;
-    padding:10px
+    padding: 30px
 
   }
   
 .main > img {
-    border:2px solid black;
-    padding:10px
+    border:2px solid #048686;
+    border-radius: 20px;
+    padding:20px 40px;
 }
