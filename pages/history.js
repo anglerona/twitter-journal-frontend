@@ -1,6 +1,6 @@
 import Layout from '../components/layout'
 import Navbar from '../components/navbar'
-import Styles from '../components/content.module.css'
+import Styles from '../components/history.module.css'
 import PastInfo from '../components/PastInfo'
 
 export default function Index() {
@@ -9,7 +9,6 @@ export default function Index() {
     <Navbar />
     <content className={Styles.content}>
     <h2>Past History </h2>
-    <p> Rest of the website goes here </p>
     </content>
     <PastInfo />
     <PastInfo />
