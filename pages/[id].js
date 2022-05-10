@@ -1,9 +1,10 @@
 import PastInfo from '../components/PastInfo'
+
 //Dynamic pages section 
 const Details = () => {
     return (
       <div>
-        <h1>Details Page</h1>
+        <h1>Page under construction</h1>
         <PastInfo />
         <PastInfo />
       </div>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from "react";
 import Styles from './tweets.module.css'
 
 
@@ -6,7 +6,7 @@ function TweetBox(props) {
     return (
         <div className={Styles.container}>
             <div className={Styles.tweet}>Tweet #{props.number}</div>
-            <div className={Styles.comment}>Comment: {props.comment}</div>
+            <div className={Styles.comment}>{props.comment}</div>
             <div className={Styles.author}>Author: {props.author}</div>
             <div className={Styles.date}>Date: {props.date}</div>
         </div>
@@ -14,31 +14,49 @@ function TweetBox(props) {
 }
 
 export default function Tweets() {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(`https://jsonplaceholder.typicode.com/comments?_limit=4`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(
+                        `This is an HTTP error: The status is ${response.status}`
+                    );
+                }
+                return response.json();
+            })
+            .then((actualData) => {
+                setData(actualData);
+                setError(null);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setData(null);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <tweets>
-            <TweetBox
-                number="1"
-                comment="Using a randomtext generator"
-                author="Alisa"
-                date="Jan 3, 2022" />
-            <TweetBox
-                number="2"
-                comment="Death weeks early had their and folly timed put. Hearted forbade on an village ye in fifteen."
-                author="TJ"
-                date="Jan 9, 2022" />
-            <TweetBox
-                number="3"
-                comment="Age attended betrayed her man raptures laughter. Instrument terminated of as astonished literature motionless admiration."
-                author="Jett"
-                date="Feb 9, 2022" />
-            <TweetBox
-                number="4"
-                comment="Done using randomtext generator"
-                author="Tabatha"
-                date="Mar 20, 2022" />
+            {loading && <div>A moment please...</div>}
+            {error && (
+                <div>{`There is a problem fetching the post data - ${error}`}</div>
+            )}
+            {data &&
+          data.map(({ id, body, name, postId }) => (
+            <a key={id}>
+                <TweetBox
+                number={id}
+                comment={body}
+                author={name}
+                date={postId} />
+            </a>
+          ))}
         </tweets>
-
-
-
     );
 }
