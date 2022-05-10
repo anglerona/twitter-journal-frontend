@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Styles from './PastInfo.module.css'
-import { EditText } from 'react-edit-text';
+import { v4 as uuid } from 'uuid';
 
-//Current Bug: The edit button that is supposed to work isn't working
-// There is an extra edit button that acts as a temporary solution
 export default function PastInfo() {
     const [hide, setHide] = useState({ display: 'none', });
-    const [text, setText] = useState('')
-    const [edit, setEdit] = useState(true)
+    const unique_id1 = uuid();
+    const unique_id2 = uuid();
+    const topic_id = unique_id1.slice(0,8)
+    const comment_id = unique_id2.slice(0,8)
+    const deleteBox = () => {
+        alert("Under Construction, will work soon");
+    }
+    
     return (
         <hover>
             <div className={Styles.container}
@@ -18,24 +22,19 @@ export default function PastInfo() {
                     setHide({ display: 'none' })
                 }}>
                 <div>
-                    <div className={Styles.topic}>
+                    <div id={topic_id} className={Styles.topic}>
                         Past Topic:
                     </div>
-                    <EditText
-                        name='Comment'
-                        className={Styles.comment}
-                        value={text}
-                        placeholder="Previous Comments:"
-                        showEditButton ={edit}
-                        editButtonContent={"Edit"}
-                        editButtonProps={Styles.hoverButton}
-                        onChange={setText}/>
+                    <div id={comment_id} className={Styles.comment} contentEditable="false">
+                        Past Comment:
+                    </div>
                 </div>
                 <div>
-                    <button onClick={() => setEdit(true)} className={Styles.hoverButton} style={hide}>Edit</button>
-                    <button onClick={() => setText('')} className={Styles.hoverButton} style={hide} >Clear</button>
+                    <button onClick={deleteBox} className={Styles.hoverButton} style={hide} >Delete</button>
+                    <button onClick={() => document.getElementById(comment_id).setAttribute("contenteditable", true)} className={Styles.hoverButton} style={hide}>Edit</button>
                 </div>
             </div>
         </hover>
-    )
+
+    );
 }

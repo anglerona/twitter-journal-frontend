@@ -1,15 +1,13 @@
-import Layout from '../components/layout'
-import Navbar from '../components/navbar'
-import Styles from '../components/history.module.css'
+import Layout from '../components/Layout'
+import Navbar from '../components/Navbar'
+import Styles from '../components/Tweets.module.css'
 import PastInfo from '../components/PastInfo'
 
-export default function Index() {
+export default function History() {
     return (
     <Layout>
     <Navbar />
-    <content className={Styles.content}>
-    <h2>Past History </h2>
-    </content>
+    <div className={Styles.title}>Past History </div>
     <PastInfo />
     <PastInfo />
     </Layout>

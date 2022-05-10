@@ -43,6 +43,11 @@ export default function Tweets() {
 
     return (
         <tweets>
+            <div className={Styles.title}>
+                Trending Topic of the Day:
+            </div>
+
+
             {loading && <div>A moment please...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>

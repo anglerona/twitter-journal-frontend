@@ -31,5 +31,13 @@
   grid-area: Date;
 }
 
+.title {
+    color:#048686;
+    text-align: center;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 30px
+}
 
 
