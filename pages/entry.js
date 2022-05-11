@@ -1,7 +1,7 @@
-import Layout from '../components/layout'
-import Navbar from '../components/navbar'
+import Layout from '../components/Layout'
+import Navbar from '../components/Navbar'
 import Form from '../components/Form'
-import Tweets from '../components/tweets'
+import Tweets from '../components/Tweets'
 
 
 export default function Index() {

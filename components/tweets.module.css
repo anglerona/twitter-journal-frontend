@@ -37,7 +37,17 @@
     font-size: 30px;
     font-family: sans-serif;
     font-weight: bold;
-    padding: 30px
+    padding-top: 40px;
+   
+}
+
+.description {
+  color: #8AC3C3;
+  padding: 10px;
+  margin: 10px;
+  font-size: 25px;
+  padding-top: 40px;
+
 }
 
 

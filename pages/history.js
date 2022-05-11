@@ -1,13 +1,13 @@
 import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
-import Styles from '../components/Tweets.module.css'
 import PastInfo from '../components/PastInfo'
+import HistoryContent from '../components/HistoryContent'
 
 export default function History() {
     return (
     <Layout>
     <Navbar />
-    <div className={Styles.title}>Past History </div>
+    <HistoryContent />
     <PastInfo />
     <PastInfo />
     </Layout>

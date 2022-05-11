@@ -40,6 +40,5 @@ export default function PastInfo() {
                 </div>
             </div>
         </hover>
-
     );
 }

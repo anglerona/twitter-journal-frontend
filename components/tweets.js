@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Styles from './tweets.module.css'
+import Styles from './Tweets.module.css'
 
 
 function TweetBox(props) {
@@ -19,7 +19,7 @@ export default function Tweets() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/comments?_limit=4`)
+        fetch(`https://jsonplaceholder.typicode.com/comments?_limit=5`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(
@@ -43,25 +43,26 @@ export default function Tweets() {
 
     return (
         <tweets>
-            <div className={Styles.title}>
-                Trending Topic of the Day:
+            <div className={Styles.description}>
+                Take at look at today's trending topic and write your thoughts!
+                <div className={Styles.title}>
+                    Today's Topic:
+                </div>
             </div>
-
-
             {loading && <div>A moment please...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
             {data &&
-          data.map(({ id, body, name, postId }) => (
-            <a key={id}>
-                <TweetBox
-                number={id}
-                comment={body}
-                author={name}
-                date={postId} />
-            </a>
-          ))}
+                data.map(({ id, body, name, postId }) => (
+                    <a key={id}>
+                        <TweetBox
+                            number={id}
+                            comment={body}
+                            author={name}
+                            date={postId} />
+                    </a>
+                ))}
         </tweets>
     );
 }
