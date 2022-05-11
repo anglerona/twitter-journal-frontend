@@ -1,21 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {TextField, Button, Typography, Paper} from '@material-ui/core';
 import useStyles from './styles';
+
+const getDataFromLS = () => {
+    // const data = localStorage.getItem('entries')
+ 
+    if (typeof window !== 'undefined') {
+        const data = localStorage.getItem('entries')
+       
+        if (data) {
+            return JSON.parse(data)
+        }
+        else {return []}
+    }
+ 
+    // if (data) {
+    //     return JSON.parse(data)
+    // }
+    // else {return []}
+}
+
+
 const Form = () =>{
     const classes = useStyles();
 
-    const handleSubmit =() =>{
+    const [entries, setEntries] = useState(getDataFromLS());
 
+    const [postData, setPostData]=useState({
+        comment: ' '
+    });
+
+    const currentId='';
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+ 
+        let entry = {  currentId, postData }
+        setEntries([entries, entry]);
+        setPostData('');
     }
 
     const clear =() => {
         
     }
+
+    useEffect(() => {
+        localStorage.setItem('entries', JSON.stringify(entries));
+    }, [entries])
     
-    const [postData, setPostData]=useState({
-        comment: ' '
-    });
-    const currentId='';
+    
     return(
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
