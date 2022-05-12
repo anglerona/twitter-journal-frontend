@@ -5,9 +5,45 @@ export default function PastInfo() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [edit, setEdit] = useState(null);
+
+    const dateConverter = (date) => {
+        return new Date(date).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", time:"numeric"}) + " " +
+        new Date(date).toLocaleTimeString();
+    }
+
+    const editComment = (commentID) => {
+        if (!edit) {
+            document.getElementById(commentID + "comment").setAttribute("contenteditable", true);
+            setEdit(commentID); 
+        }
+    }
+
+    const updateComment = (commentID, commment) => {
+        fetch("http://localhost:8080/comment/" + commentID, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: commment
+        })
+        .then( () => {
+            console.log("updated!");
+            setEdit(null); 
+            window.location.reload();
+        })
+    }
+    
+
+    const deleteComment = (commentId) => {
+        fetch("http://localhost:8080/comment/" + commentId, {
+            method: 'DELETE',
+        })
+        .then( () => {
+            window.location.reload();
+        })
+    }
 
     useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/comments?_limit=3`)
+        fetch(`http://localhost:8080/comment/Isaidoun`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(
@@ -36,31 +72,32 @@ export default function PastInfo() {
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
             {data &&
-                data.map(({ id, body, name }) => (
-                    <a key={id}>
-                        <div id={id + "container"} className={Styles.container}
+                data.map(({ commentID, topic, comment, lastUpd }) => (
+                    <a key={commentID}>
+                        <div id={commentID + "container"} className={Styles.container}
                             onMouseEnter={() => {
-                                document.getElementById(id + "edit").style.display = 'block'
-                                document.getElementById(id + "delete").style.display = 'block'
+                                document.getElementById(commentID + "edit").style.display = 'block'
+                                document.getElementById(commentID + "delete").style.display = 'block'
                             }}
                             onMouseLeave={() => {
-                                document.getElementById(id + "edit").style.display = 'none'
-                                document.getElementById(id + "delete").style.display = 'none'
+                                document.getElementById(commentID + "edit").style.display = 'none'
+                                document.getElementById(commentID + "delete").style.display = 'none'
                             }}>
                             <div>
                                 <div className={Styles.topic}>
-                                    Past Topic: {name}
+                                    Past Topic: {topic}
                                 </div>
-                                <div id={id + "comment"} className={Styles.comment} contentEditable="false">
-                                    Past Comment: {body}
+                                <div id={commentID + "comment"} className={Styles.comment} contentEditable="false">
+                                    {comment}
                                 </div>
-                                <div id={id + "date"} className={Styles.date}>
-                                    Date:
+                                <div id={commentID + "date"} className={Styles.date}>
+                                    Date: {dateConverter(lastUpd)}
                                 </div>
                             </div>
                             <div>
-                                <button id={id + "delete"} onClick={() => document.getElementById(id + "container").remove()} className={Styles.hoverButton}>Delete</button>
-                                <button id={id + "edit"} onClick={() => document.getElementById(id + "comment").setAttribute("contenteditable", true)} className={Styles.hoverButton}>Edit</button>
+                            <button id={commentID + "delete"} onClick={() => deleteComment(commentID)} className={Styles.hoverButton}>Delete</button>
+                            {!(edit == commentID) && <button id={commentID + "edit"} onClick={() => editComment(commentID)}  className={Styles.hoverButton}>Edit</button>}
+                            {(edit == commentID) && <button id={commentID + "edit"} onClick={() => updateComment(commentID, document.getElementById(commentID + "comment").innerHTML)}  className={Styles.hoverButton}>Update</button>}
                             </div>
                         </div>
                     </a>
