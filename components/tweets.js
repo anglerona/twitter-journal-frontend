@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Styles from './Tweets.module.css'
+import Styles from './Tweets.module.css';
+import axios from "axios";
 
 
 function TweetBox(props) {
@@ -15,61 +16,61 @@ function TweetBox(props) {
 
 export default function Tweets() {
 
+
     
-    
-    const [topicData, setTopicData] = useState(null);
-    const [tweetData, setTweetData] = useState(null);
+    const [topicData, setTopicsData] = useState([]);
+    const [tweetData, setTweetsData] = useState([]);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
-   
+
+    const [topic, setTopic] = useState("loading...")
     const chosenTopic = Math.floor(Math.random() * (51) + 0)
 
-    useEffect (()=> {
 
-       return fetch(`http://localhost:8080/trends`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(
-                        `This is an HTTP error: The status is ${response.status}`
-                    );
-                }
-                return response.json();
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    setTopicData(response);
-                console.log("run")
-                console.log(response)
-                var trend_query = response[chosenTopic].query
-                return fetch(`http://localhost:8080/trends/${trend_query}`)
-                }
-            })
-            .then((response) => {
-                if (response.ok) {
-                    setTweetData(response);
-                    console.log(response)
+    const fetchData = () => {
+        const topicsUrl = `http://localhost:8080/trends/`
+        const getTopics = axios.get(topicsUrl)
+        const tweetsUrl = `http://localhost:8080/trends/${}`
+        const getTweets = axios.get(tweetsUrl)
+        axios.all([getTopics, getTweets]).then(
 
-                }
-                setError(err);
-                return response
+            
+            
+            axios.spread(( ... allData) => {
+                const allTopicsData = allData[0].data
+                console.log(allTopicsData)
+
                 
-            })
-            .catch((err) => {
-                err = "err"
-                setTopicData(null)
-                setTweetData(null)
-            })
-            .finally(() => {
-                setLoading(false);
-            });
 
-        })
+                const allTweetsData = allData[1].data
+                const lengthOfTopics = allData[0].data.length
+                const chosenTopic = Math.floor(Math.random() * (lengthOfTopics+1) + 0)
+
+                setTopic(allData[0].data[chosenTopic].name)
+
+                setTopicsData(allTopicsData)
+                setTweetsData(allTweetsData)
+            })
+        )
+    }
+
+    
+
+    
+
+    
+    
+   
+
+    useEffect(() => {
+        fetchData()
+    }, [])
         
     return (
         <tweets>
 
-            {loading && <div>A moment please...</div>}
+            {loading && <div></div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
@@ -77,7 +78,7 @@ export default function Tweets() {
             <div className={Styles.description}>
                 Take at look at today's trending topic and write your thoughts!
                 <div className={Styles.title}>
-                   Today's Topic: {topicData && topicData[0].name} 
+                   Today's Topic: {topic}
                 </div>
             </div>
             {tweetData &&
