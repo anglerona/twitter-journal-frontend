@@ -14,12 +14,14 @@ function TweetBox(props) {
 }
 
 export default function Tweets() {
-    const [data, setData] = useState(null);
+
+    const [topicData, setTopicData] = useState(null);
+    const [tweetData, setTweetData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const chosenTopic = Math.floor(Math.random() * (51) + 0)
 
-    useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/comments?_limit=5`)
+        fetch(`http://localhost:8080/trends/`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(
@@ -28,39 +30,53 @@ export default function Tweets() {
                 }
                 return response.json();
             })
-            .then((actualData) => {
-                setData(actualData);
+            .then((response) => {
+               return setTopicData(response).then((response) => {
+                var trend_query = topicData && topicData[0].query
+                return fetch(`http://localhost:8080/trends/${trend_query}`)
+                })           
+            })
+            .then((response) => {
+                if (response.ok) {
+                    setTweetData(response);
+                    console.log(tweetData) 
+                }
                 setError(null);
+                return response
+                
             })
             .catch((err) => {
                 setError(err.message);
-                setData(null);
+                setTopicData(null);
+                setTweetData(null);
             })
             .finally(() => {
                 setLoading(false);
             });
-    }, []);
-
+        
     return (
         <tweets>
-            <div className={Styles.description}>
-                Take at look at today's trending topic and write your thoughts!
-                <div className={Styles.title}>
-                    Today's Topic:
-                </div>
-            </div>
+
             {loading && <div>A moment please...</div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
-            {data &&
-                data.map(({ id, body, name, postId }) => (
+           
+            <div className={Styles.description}>
+                Take at look at today's trending topic and write your thoughts!
+                <div className={Styles.title}>
+                   Today's Topic: {topicData && topicData[0].name} 
+                </div>
+            </div>
+            {tweetData &&
+                tweetData.map(({ id, name, text, createdAt }) => (
                     <a key={id}>
+                        
                         <TweetBox
                             number={id}
-                            comment={body}
+                            comment={text}
                             author={name}
-                            date={postId} />
+                            date={createdAt} />
                     </a>
                 ))}
         </tweets>

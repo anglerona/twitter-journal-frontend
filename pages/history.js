@@ -9,7 +9,6 @@ export default function History() {
     <Navbar />
     <HistoryContent />
     <PastInfo />
-    <PastInfo />
     </Layout>
     )
   }
