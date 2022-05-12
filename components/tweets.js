@@ -15,13 +15,19 @@ function TweetBox(props) {
 
 export default function Tweets() {
 
+    
+    
     const [topicData, setTopicData] = useState(null);
     const [tweetData, setTweetData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
+   
     const chosenTopic = Math.floor(Math.random() * (51) + 0)
 
-        fetch(`http://localhost:8080/trends/`)
+    useEffect (()=> {
+
+       return fetch(`http://localhost:8080/trends`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(
@@ -31,28 +37,34 @@ export default function Tweets() {
                 return response.json();
             })
             .then((response) => {
-               return setTopicData(response).then((response) => {
-                var trend_query = topicData && topicData[0].query
+                if (!response.ok) {
+                    setTopicData(response);
+                console.log("run")
+                console.log(response)
+                var trend_query = response[chosenTopic].query
                 return fetch(`http://localhost:8080/trends/${trend_query}`)
-                })           
+                }
             })
             .then((response) => {
                 if (response.ok) {
                     setTweetData(response);
-                    console.log(tweetData) 
+                    console.log(response)
+
                 }
-                setError(null);
+                setError(err);
                 return response
                 
             })
             .catch((err) => {
-                setError(err.message);
-                setTopicData(null);
-                setTweetData(null);
+                err = "err"
+                setTopicData(null)
+                setTweetData(null)
             })
             .finally(() => {
                 setLoading(false);
             });
+
+        })
         
     return (
         <tweets>
@@ -70,8 +82,7 @@ export default function Tweets() {
             </div>
             {tweetData &&
                 tweetData.map(({ id, name, text, createdAt }) => (
-                    <a key={id}>
-                        
+                    <a key={id}>  
                         <TweetBox
                             number={id}
                             comment={text}
