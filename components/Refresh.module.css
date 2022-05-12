@@ -1,0 +1,16 @@
+.refresh {
+    width: 150px;
+    height:65px;
+    margin: 20px;
+    text-decoration: none;
+    background: #048686;
+    border-radius: 15px;
+    border-color: white;
+    font-size: 18px;
+    padding: 20px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    color: white;
+    transition: all 0.125s ease;
+    text-align: center;
+}
