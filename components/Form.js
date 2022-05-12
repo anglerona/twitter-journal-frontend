@@ -44,6 +44,20 @@ const Form = () =>{
         
     }
 
+    const sendComment =(commentID) => {
+        fetch("http://localhost:8080/comment/" + commentID, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+           
+        })
+        .then( () => {
+            console.log("comment sent!");
+            setEdit(null); 
+            window.location.reload();
+        })
+    }
+    
+
     useEffect(() => {
         localStorage.setItem('entries', JSON.stringify(entries));
     }, [entries])
@@ -54,7 +68,7 @@ const Form = () =>{
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6" text-align="center">Leave Your Comments</Typography>
                 <TextField name="comment" variant="outlined" label = "Write your thoughts" fullWidth value={postData.comment} onChange={(e)=>setPostData({ ...postData, comment: e.target.value})}/>
-                <Button className={classes.buttonSubmit} variant="contained" type="submit" fullWidth>{currentId ? 'Editing':'Submit'} </Button>
+                <Button onClick={sendComment} className={classes.buttonSubmit} variant="contained" type="submit" fullWidth>{currentId ? 'Editing':'Submit'} </Button>
                 <Button className={classes.buttonSubmit} style={{backgroundColor: '#FD5082'}} variant="contained" onClick={clear} fullWidth>Clear</Button>
              </form>
 
