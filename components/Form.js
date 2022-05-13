@@ -16,6 +16,10 @@ const getDataFromLS = () => {
     }
 
 }
+    const dateConverter = (date) => {
+        return new Date(date).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric", time:"numeric"}) + " " +
+        new Date(date).toLocaleTimeString();
+    }
 
 function TweetBox(props) {
     return (
@@ -23,7 +27,7 @@ function TweetBox(props) {
             <div className={Styles.tweet}>Tweet </div>
             <div className={Styles.comment}>{props.comment}</div>
             <div className={Styles.author}>Author: {props.author}</div>
-            <div className={Styles.date}>Date: {props.date}</div>
+            <div className={Styles.date}>Date: {dateConverter(props.date)}</div>
         </div>
     )
 }
