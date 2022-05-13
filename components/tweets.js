@@ -31,8 +31,7 @@ export default function Tweets() {
             setTopic(response.data[chosenTopic].name)
             axios.get(`http://localhost:8080/trends/${response.data[chosenTopic].name}`)
                 .then((tweets) => {
-                    console.log(tweets.data)
-                        setTweetsData(tweets.data)
+                    setTweetsData(tweets.data)
                 })
         })
     }
