@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { TextField, Button, Typography } from '@material-ui/core';
+import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import useStyles from './styles';
 import Styles from './Tweets.module.css';
 import axios from "axios";
 
 const getDataFromLS = () => {
-
     if (typeof window !== 'undefined') {
         const data = localStorage.getItem('entries')
 
@@ -32,7 +31,7 @@ const Form = () => {
     const [edit, setEdit] = useState(null);
     const classes = useStyles();
     const [entries, setEntries] = useState(getDataFromLS());
-    const [postData, setPostData] = useState({ comment: ' ', topic: ' ' });
+    const [postData, setPostData] = useState({comment: ' ', topic: ' '});
     const currentId = '';
 
     const [tweetData, setTweetsData] = useState([]);
@@ -40,18 +39,24 @@ const Form = () => {
     const [error, setError] = useState(null);
     const [topic, setTopic] = useState("loading...")
 
+    const dateConverter = (date) => {
+        return new Date(date).toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric", time: "numeric" }) + " " +
+            new Date(date).toLocaleTimeString();
 
+    }
+    
     const fetchData = () => {
         const topicsUrl = `http://localhost:8080/trends/`
         const getTopics = axios.get(topicsUrl).then((response) => {
 
             const lengthOfTopics = response.data.length
             const chosenTopic = Math.floor(Math.random() * (lengthOfTopics + 1) + 0)
-            setTopic(response.data[chosenTopic].name)
+
             axios.get(`http://localhost:8080/trends/${response.data[chosenTopic].name}`)
                 .then((tweets) => {
                     console.log(tweets.data)
-                    setTweetsData(tweets.data)
+                        setTweetsData(tweets.data)
+            
                 })
         })
     }
@@ -60,20 +65,21 @@ const Form = () => {
         fetchData()
     }, [])
 
-
-    const addNewComment = (comment,topic) => {
+    const addNewComment = (comment ) => {
 
         fetch("http://localhost:8080/comment", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "comment": comment, "userID": "Isaidoun","topic":topic }),
+            body: JSON.stringify({"comment":comment, "userID":"Isaidoun"}),
         })
             .then(() => {
                 console.log("submitted!");
                 console.log(comment)
                 setEdit(null);
             })
+        
     }
+
     const handleSubmit = (e) => {
         const comment = postData.comment
         const topic = postData.topic
@@ -90,16 +96,15 @@ const Form = () => {
     }
 
     return (
-        <tweets>
-
-            {loading && <div></div>}
+    <tweets>
+         {loading && <div></div>}
             {error && (
                 <div>{`There is a problem fetching the post data - ${error}`}</div>
             )}
 
             <div className={Styles.description}>
                 Take at look at today's trending topic and write your thoughts!
-                <div className={Styles.title}>
+                <div className={Styles.title} >
                     Today's Topic: {topic}
                 </div>
             </div>
@@ -113,15 +118,14 @@ const Form = () => {
                             date={createdAt} />
                     </a>
                 ))}
-
-            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h5" text-align="center"  style={{ color: '#048686' }}>Leave Your Comment</Typography>
-                <TextField name="comment" variant="outlined" label="Write your thoughts" fullWidth value={postData.comment} onChange={(e) => setPostData({ topic:`${topic}`, comment: e.target.value })} />
-                <Button className={classes.buttonSubmit} variant="contained" type="submit" fullWidth>Submit</Button>
-                <Button className={classes.buttonSubmit} style={{ backgroundColor: '#FD5082' }} variant="contained" onClick={clear} fullWidth>Clear</Button>
-            </form>
-        </tweets>
-    )
+        <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+            <Typography variant="h5" text-align="center">{topic}</Typography>
+            <TextField name="comment" variant="outlined" label="Write your thoughts" fullWidth value={postData.comment} onChange={(e) => setPostData({ topic:{topic}, comment: e.target.value })} />
+            <Button className={classes.buttonSubmit} variant="contained" type="submit" fullWidth>Submit</Button>
+            <Button className={classes.buttonSubmit} style={{ backgroundColor: '#FD5082' }} variant="contained" onClick={clear} fullWidth>Clear</Button>
+        </form>
+    </tweets>)
 }
 
 export default Form; 
+//Leave Your Comments

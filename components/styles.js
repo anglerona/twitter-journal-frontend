@@ -13,10 +13,14 @@ export default makeStyles((theme) => ({
     color: '#048686',
   },
   form: {
+    padding: theme.spacing(2),
+    marginBottom: 50,
+    marginTop: 50,
+
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    padding: '0 50px',
+    padding: '0 20px',
   },
   buttonSubmit: {
     borderRadius: '15px',

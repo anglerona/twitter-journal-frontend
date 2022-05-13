@@ -1,0 +1,38 @@
+.refresh {
+    width: 96%;
+    height:65px;
+    margin: 20px;
+    text-decoration: none;
+    background: #048686;
+    border-radius: 15px;
+    border-color: white;
+    font-size: 18px;
+    padding: 20px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    color: white;
+    transition: all 0.125s ease;
+    text-align: center;
+}
+
+.a {
+    width:30%;
+    height:40px;
+    margin: 8px 0;
+    text-decoration: none;
+    background: #048686;
+    border-radius: 4px;
+    font-size: 18px;
+    padding: 20px 24px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    color: white;
+    transition: all 0.125s ease;
+    text-align: center;
+    float:center;
+    position: relative;
+}
+
+.a:hover {
+    background-color: #2eb3b3;
+}

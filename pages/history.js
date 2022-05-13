@@ -1,5 +1,5 @@
-import Layout from '../components/Layout'
-import Navbar from '../components/Navbar'
+import Layout from '../components/layout'
+import Navbar from '../components/navbar'
 import PastInfo from '../components/PastInfo'
 import HistoryContent from '../components/HistoryContent'
 
